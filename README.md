@@ -1,2 +1,2 @@
-# algorithm
-Because we love algorithm :upsetdown_smile:
+# Algorithm
+Because we love algorithm :smiling_imp:

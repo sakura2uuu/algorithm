@@ -33,12 +33,21 @@ const DIRECTIONS = {
   LEFT: 'left'
 };
 
-function fill(element, planeType, direction) {
-  planeType.forEach((coordinates, index) =>  {
+const NUM_OF_PLANES_INPUT = document.getElementById('number-of-planes');
+const RESTART_BUTTON = document.getElementById('restart-button');
+const REVEAL_BUTTON = document.getElementById('reveal-button');
+const TYPES_OF_PLANES_CONTAINER = document.getElementById('types-of-planes');
+
+var numOfPlanes = 3;
+var planes = [];
+var directions = [];
+
+function fill(element, planeType, headCoordinates) {
+  planeType.forEach((coordinates) =>  {
     let row = element.querySelectorAll('.u-cf')[coordinates[0]];
     let column = row.querySelectorAll('.square')[coordinates[1]];
 
-    if (index === 0) {
+    if (JSON.stringify(coordinates) == JSON.stringify(headCoordinates)) {
       column.classList.add('red');
     } else {
       column.classList.add('blue');
@@ -60,28 +69,88 @@ function background(dimension) {
   return html;
 };
 
-function draw(element, dimension, planeType, direction) {
+function draw(element, dimension, planeType, headCoordinates) {
   element.innerHTML = background(dimension);
-  fill(element.querySelector('.grid'), planeType, direction);
+  fill(element.querySelector('.grid'), planeType, headCoordinates);
 }
 
 function listPlaneTypes() {
-  var plane1 = document.getElementById('plane-type-1'),
-      plane2 = document.getElementById('plane-type-2'),
-      plane3 = document.getElementById('plane-type-3');
+  TYPES_OF_PLANES_CONTAINER.innerHTML = '';
 
-  draw(plane1, DIMENSIONS.DEMO, PLANE_TYPES.ONE, DIRECTIONS.UP);
-  draw(plane2, DIMENSIONS.DEMO, PLANE_TYPES.TWO, DIRECTIONS.UP);
-  draw(plane3, DIMENSIONS.DEMO, PLANE_TYPES.THREE, DIRECTIONS.UP);
+  for(var i = 0; i < numOfPlanes; i++) {
+    var element = document.createElement('div');
+    element.className = 'plane-type';
+
+    TYPES_OF_PLANES_CONTAINER.appendChild(element);
+    draw(element, DIMENSIONS.DEMO, planes[i], planes[i][0]);
+  }
 };
 
-function startGame() {
-  var game = document.getElementById('game');
+function getNumberOfPlanes() {
+  return parseInt(NUM_OF_PLANES_INPUT.value);
 }
 
-function init() {
-  listPlaneTypes();
-  startGame();
+function randomPlane() {
+  const num = Math.floor((Math.random() * 3));
+
+  switch(num) {
+    case 0:
+      return PLANE_TYPES.ONE;
+    case 1:
+      return PLANE_TYPES.TWO;
+    case 2:
+      return PLANE_TYPES.THREE;
+  }
+}
+
+function randomDirection() {
+  const num = Math.floor((Math.random() * 4));
+
+  switch(num) {
+    case 0:
+      return DIRECTIONS.UP;
+    case 1:
+      return DIRECTIONS.DOWN;
+    case 2:
+      return DIRECTIONS.LEFT;
+    case 3:
+      return DIRECTIONS.RIGHT;
+  }
+}
+
+function resetVariables() {
+  numOfPlanes = getNumberOfPlanes();
+  planes = [];
+  directions = [];
+
+  for(var i = 0; i < numOfPlanes; i++) {
+    planes.push(randomPlane());
+    directions.push(randomDirection());
+  }
+}
+
+function setupGame() {
+  var game = document.getElementById('game');
+  game.innerHTML = background(DIMENSIONS.ACTUAL);
+
+
 };
+
+function init() {
+  resetVariables();
+  listPlaneTypes();
+  setupGame();
+};
+
+NUM_OF_PLANES_INPUT.addEventListener('change', function() {
+  init();
+});
+
+RESTART_BUTTON.addEventListener('click', function() {
+  init();
+});
+
+REVEAL_BUTTON.addEventListener('click', function() {
+});
 
 init();

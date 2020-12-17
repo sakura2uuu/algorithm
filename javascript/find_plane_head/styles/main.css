@@ -28,6 +28,19 @@
   border-left: 0px;
 }
 
+.plane-type+.plane-type {
+  margin-top: 1rem;
+}
+
 .grid .u-cf+.u-cf .square {
   border-top: 0px;
+}
+
+.column label {
+  display: inline-block;
+}
+
+#game .square {
+  width: 4rem;
+  height: 4rem;
 }

@@ -11,26 +11,30 @@
     <div class="container">
       <h1>Finding Plane Head</h1>
       <p>
-        This is a game played on a Chinese variety show 名侦探学院. The objective is to find the plane head.
+        This is a game played on a Chinese variety show 名侦探学院. The objective is to find the plane head, aka the red square.
         Click <a href='https://www.bilibili.com/video/av85530954'>here</a> for video clips of the game played in the show.
       </p>
+      <hr>
       <div class="row">
-        <h2>Type of planes</h2>
         <div class="column one-third">
-          <div id="plane-type-1"></div>
-          <small>Type 1</small>
+          <label for="number-of-planes">Number of Planes</label>
+          <select id="number-of-planes">
+            <option value="2" selected="true">2</option>
+            <option value="3">3</option>
+          </select>
         </div>
         <div class="column one-third">
-          <div id="plane-type-2"></div>
-          <small>Type 2</small>
+          <button id="restart-button">Another Round</button>
         </div>
         <div class="column one-third">
-          <div id="plane-type-3"></div>
-          <small>Type 3</small>
+          <button id="reveal-button">Reveal Answer</button>
         </div>
       </div>
-      <div class="center">
-        <div id="game">
+      <div class="row">
+        <div class="column one-third" id="types-of-planes">
+          <h3>Type of planes</h3>
+        </div>
+        <div class="column two-thirds center" id="game">
         </div>
       </div>
     </div>

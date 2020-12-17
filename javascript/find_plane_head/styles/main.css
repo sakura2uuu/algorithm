@@ -1,0 +1,33 @@
+.row .column {
+  margin-left: 2%;
+}
+
+.square {
+  width: 3rem;
+  height: 3rem;
+  border: 1px solid black;
+}
+
+.square.red {
+  background-color: #f60001;
+}
+
+.square.blue {
+  background-color: #21a1ee;
+}
+
+.square.green {
+  background-color: #86c937;
+}
+
+.square.yellow {
+  background-color: #ffff00;
+}
+
+.square+.square {
+  border-left: 0px;
+}
+
+.grid .u-cf+.u-cf .square {
+  border-top: 0px;
+}

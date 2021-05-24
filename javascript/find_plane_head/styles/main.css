@@ -6,6 +6,7 @@
   width: 3rem;
   height: 3rem;
   border: 1px solid black;
+  position: relative;
 }
 
 .square.red {
@@ -22,6 +23,32 @@
 
 .square.yellow {
   background-color: #ffff00;
+}
+
+.square.cross:before,
+.square.cross:after {
+  content: '';
+  position: absolute;
+  width: 57px;
+  height: 1px;
+  background-color: black;
+  border-radius: 2px;
+  top: 19px;
+  box-shadow: 0 0 1px 0 #ccc;
+}
+
+.square.cross:before {
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  transform: rotate(45deg);
+  left: -8px;
+}
+
+.square.cross:after {
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+  right: -8px;
 }
 
 .square+.square {
@@ -43,4 +70,14 @@
 #game .square {
   width: 4rem;
   height: 4rem;
+}
+
+#game .square:hover {
+  cursor: pointer;
+  background-color: lightgrey;
+}
+
+#game .square.disabled:hover {
+  cursor: not-allowed;
+  background-color: initial;
 }

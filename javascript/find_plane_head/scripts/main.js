@@ -129,11 +129,33 @@ function resetVariables() {
   }
 }
 
+function coordinatesOfCurrentElement(element) {
+  var parentNode = element.parentNode;
+
+  return [
+    [...parentNode.parentNode.children].indexOf(parentNode),
+    [...parentNode.children].indexOf(element)
+  ]
+}
+
+function squareBinding(element) {
+  element.querySelectorAll('.square').forEach(function(item) {
+    item.addEventListener('click', function(event) {
+      if (event.target.classList.contains('disabled')) {
+        return;
+      }
+
+      var coordinates = coordinatesOfCurrentElement(event.target);
+      console.log(coordinates);
+    });
+  });
+};
+
 function setupGame() {
   var game = document.getElementById('game');
   game.innerHTML = background(DIMENSIONS.ACTUAL);
 
-
+  squareBinding(game);
 };
 
 function init() {
